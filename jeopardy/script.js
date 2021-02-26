@@ -19,6 +19,7 @@ class TriviaGameShow {
       // State
       this.currentClue = null;
       this.score = 0;
+      this.categoryIndex = 0;
       
       // Elements
       this.boardElement = element.querySelector(".board");
@@ -46,59 +47,70 @@ class TriviaGameShow {
       
       // Render initial state of score
       this.updateScore(0);
-      
-      // Kick off the category fetch
-      this.fetchCategories();
    }
 
-   fetchCategories() {
-      // Fetch all of the data from the API
-      const categories = this.useCategoryIds.map(category_id => {
-          return new Promise((resolve, reject) => {
-             fetch(`https://jservice.io/api/category?id=${category_id}`)
-                .then(response => response.json()).then(data => {
-                   resolve(data);
-                });
-          });
-       });
-       
-       // Sift through the data when all categories come back
-       Promise.all(categories).then(results => {
+   addData(rawCategory, questionArray) {
+
+      var category = {
+         title: rawCategory.title,
+         clues: []
+      };
+
+      console.log("category");
+
+      questionArray.forEach((question, index) => {
+         const clueIdentifier = this.categoryIndex + "-" + index;
+         category.clues.push(clueIdentifier);
+
+         this.clues[clueIdentifier] = {
+            question: question.question,
+            answer: question.answer,
+            value: (index + 1) * 100
+         };
+      });
+
+      this.categories.push(category);
+      this.renderCategory(category);
+      this.categoryIndex++;
+
+
+      // // Sift through the data when all categories come back
+      //  Promise.all(categories).then(results => {
           
-          // Build up our list of categories
-          results.forEach((result, categoryIndex) => {
+      //     // Build up our list of categories
+      //     results.forEach((result, categoryIndex) => {
              
-             // Start with a blank category
-             var category = {
-                title: result.title,
-                clues: []
-             }
+      //        // Start with a blank category
+      //        var category = {
+      //           title: result.title,
+      //           clues: []
+      //        }
              
-             // Add every clue within a category to our database of clues
-             var clues = shuffle(result.clues).splice(0,5).forEach((clue, index) => {
-                console.log(clue)
+      //        // Add every clue within a category to our database of clues
+      //        var clues = shuffle(result.clues).splice(0,5).forEach((clue, index) => {
+      //           console.log(clue)
                 
-                // Create unique ID for this clue
-                var clueId = categoryIndex + "-" + index;
-                category.clues.push(clueId);
+      //           // Create unique ID for this clue
+      //           var clueId = categoryIndex + "-" + index;
+      //           category.clues.push(clueId);
                 
-                // Add clue to DB
-                this.clues[clueId] = {
-                   question: clue.question,
-                   answer: clue.answer,
-                   value: (index + 1) * 100
-                };
-             })
+      //           // Add clue to DB
+      //           this.clues[clueId] = {
+      //              question: clue.question,
+      //              answer: clue.answer,
+      //              value: (index + 1) * 100
+      //           };
+      //        })
              
-             // Add this category to our DB of categories
-             this.categories.push(category);
-          });
+      //        // Add this category to our DB of categories
+      //        this.categories.push(category);
+      //     });
           
-          // Render each category to the DOM
-          this.categories.forEach((c) => {
-             this.renderCategory(c);
-          });
-       });
+      //     // Render each category to the DOM
+      //     this.categories.forEach((c) => {
+      //        this.renderCategory(c);
+      //     });
+      //  });
   }
 
    renderCategory(category) {      
