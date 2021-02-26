@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Jeopardy</title>
+
+   <!-- Embedding the stylesheet. -->
+   <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+   <div class="app">
+      <!-- Top section -->
+      <header class="top-header">
+         <h1>Trivia Game Show</h1>
+         <p class="score">Score <span class="score-count"></span></p>
+      </header>
+      
+      <!-- container for the board -->
+       <div class="board">
+          <!-- categories get injected here -->
+       </div>
+      
+      <!-- invisible container for the card prompt -->
+       <div class="card-modal">
+          <div class=card-modal-inner>
+             <h2 class="clue-text"><!-- clue gets injected here --></h2>
+             <form autocomplete="off">
+                <input name="user-answer" type="text" />
+                <button type="submit">Answer</button>
+             </form>
+             <div class="result">
+                <p class="result_success">CORRECT</p>
+                <p class="result_fail">INCORRECT</p>
+                <p class="result_correct-answer">
+                   The correct answer is <span class="result_correct-answer-text"><!--answer gets injected here--></span>
+                </p>
+             </div>
+          </div>
+       </div>
+   </div>
+
+   <!-- Embedding the script. -->
+   <script src="./script.js"></script>
+</body>
+</html>
