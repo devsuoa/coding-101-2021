@@ -72,45 +72,6 @@ class TriviaGameShow {
       this.categories.push(category);
       this.renderCategory(category);
       this.categoryIndex++;
-
-
-      // // Sift through the data when all categories come back
-      //  Promise.all(categories).then(results => {
-          
-      //     // Build up our list of categories
-      //     results.forEach((result, categoryIndex) => {
-             
-      //        // Start with a blank category
-      //        var category = {
-      //           title: result.title,
-      //           clues: []
-      //        }
-             
-      //        // Add every clue within a category to our database of clues
-      //        var clues = shuffle(result.clues).splice(0,5).forEach((clue, index) => {
-      //           console.log(clue)
-                
-      //           // Create unique ID for this clue
-      //           var clueId = categoryIndex + "-" + index;
-      //           category.clues.push(clueId);
-                
-      //           // Add clue to DB
-      //           this.clues[clueId] = {
-      //              question: clue.question,
-      //              answer: clue.answer,
-      //              value: (index + 1) * 100
-      //           };
-      //        })
-             
-      //        // Add this category to our DB of categories
-      //        this.categories.push(category);
-      //     });
-          
-      //     // Render each category to the DOM
-      //     this.categories.forEach((c) => {
-      //        this.renderCategory(c);
-      //     });
-      //  });
   }
 
    renderCategory(category) {      
