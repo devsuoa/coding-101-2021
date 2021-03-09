@@ -47,9 +47,10 @@ function fetchQuestions(category) {
  *        Array of questions retrieved from fetchQuestions function.
  * Output: n/a
  */
-function addToGame(category, questions) {
-    game.addData(category, questions);
+function addToGame(categories, questions) {
+    for (let x = 0; x < categories.length; x++) {
+        game.addData(categories[x], questions[x]);
+    };
+    
     game.initGame();
 }
-
-exercise();

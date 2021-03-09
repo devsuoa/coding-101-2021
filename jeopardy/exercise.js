@@ -1,1 +1,0 @@
-// Write a function here called "Exercise".
