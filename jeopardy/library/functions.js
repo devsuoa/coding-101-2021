@@ -8,7 +8,7 @@
  *         }]
  */
 
-function fetchCategories(number) {
+function fetchCategoriesFromAPI(number) {
     const offset = Math.random() * 1000;
 
     var request = new XMLHttpRequest();
@@ -29,7 +29,7 @@ function fetchCategories(number) {
  *              answer: string,
  *         }]
  */
-function fetchQuestions(category) {
+function fetchQuestionsFromAPI(category) {
     var request = new XMLHttpRequest();
     request.open("GET", `https://jservice.io/api/category?id=${category.id}`, false);
     request.send(null);
